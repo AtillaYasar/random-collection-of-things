@@ -20,6 +20,7 @@ name is self-explanatory... a bunch of my repos will probably end up here
 ## pixiv
 - beautiful command line interface
 - download.py: download from pixiv
-- collage.py: make collages
+- collage.py: make image collages, options for custom captions, number of columns, font size and color, ability to set maximum image size
 - how to use? just run (meaning, download and double click) either app. it will be self-explanatory
+- note: download.py will break if pixiv patches this dumb hack that lets you download original images without a login. lol.
 ![image](https://user-images.githubusercontent.com/112716905/205492410-50a187f7-1e1a-4053-9770-e4bea6ab2cb3.png)
