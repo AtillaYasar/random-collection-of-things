@@ -16,3 +16,10 @@ name is self-explanatory... a bunch of my repos will probably end up here
 - example input: https://pastebin.com/yjVwMe1E  
 - example output html: https://pastebin.com/KjCp2aVY
 - example output css: https://pastebin.com/KdBGXzq0  
+
+## pixiv
+- beautiful command line interface
+- download.py: download from pixiv
+- collage.py: make collages
+- how to use? just run either app. it will be self-explanatory
+![image](https://user-images.githubusercontent.com/112716905/205492410-50a187f7-1e1a-4053-9770-e4bea6ab2cb3.png)
