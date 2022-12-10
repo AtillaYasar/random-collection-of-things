@@ -15,7 +15,8 @@ name is self-explanatory... a bunch of my repos will probably end up here
 - it allows you to stop_writing_html_and_css
 - example input: https://pastebin.com/yjVwMe1E  
 - example output html: https://pastebin.com/KjCp2aVY
-- example output css: https://pastebin.com/KdBGXzq0  
+- example output css: https://pastebin.com/KdBGXzq0 
+- todo: a way to manage multiple pages, and have a shared css and js library. and auto-generate a full site. im working on a blog, so i am my own client here.
 
 ## pixiv
 - beautiful command line interface
