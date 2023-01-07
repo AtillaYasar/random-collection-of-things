@@ -28,6 +28,8 @@ name is self-explanatory... a bunch of my repos will probably end up here
 
 ## run_something.py
 - prints a list of files, lets you enter a number, runs that file
+- ![image](https://user-images.githubusercontent.com/112716905/211153821-f7d6ae51-6612-4d56-b9af-2664f8ffcb89.png)
+
 
 ## make_something.py
 - lets you write a filename, creates that file in the current directory
