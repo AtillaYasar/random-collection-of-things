@@ -9,7 +9,7 @@ name is self-explanatory... a bunch of my repos will probably end up here
 ## Ram aid + text editor with highlighting
 - https://github.com/AtillaYasar/mental-tools/
 - I'll put the files here some day.
-- extremely useful tool, i use it for almost every single thing that i do
+- extremely useful tool, i use it for almost every single task that requires thinking and/or oversight over a problem
 
 ## lets_all_stop_writing_html_and_css
 - it allows you to stop_writing_html_and_css
