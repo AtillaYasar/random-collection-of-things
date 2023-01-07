@@ -25,3 +25,11 @@ name is self-explanatory... a bunch of my repos will probably end up here
 - how to use? just run (meaning, download and double click) either app. it will be self-explanatory
 - note: download.py will break if pixiv patches this dumb hack that lets you download original images without a login. lol.
 ![image](https://user-images.githubusercontent.com/112716905/205492410-50a187f7-1e1a-4053-9770-e4bea6ab2cb3.png)
+
+## run_something.py
+- prints a list of files, lets you enter a number, runs that file
+
+## make_something.py
+- lets you write a filename, creates that file in the current directory
+- if you it's a html, it will insert some things
+- if the file already exists, it wont let you make it
