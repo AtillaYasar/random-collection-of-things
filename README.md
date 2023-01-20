@@ -36,3 +36,8 @@ name is self-explanatory... a bunch of my repos will probably end up here
 - if you it's a html, it will insert some things
 - if the file already exists, it wont let you make it
 - ![image](https://user-images.githubusercontent.com/112716905/211151843-81bf8c17-28bf-44f8-a584-8d4f853a5090.png)
+
+## get_toc.py
+- little command line interface to find and print the table of contents of a .md file in the current directory
+- usage example here: https://youtu.be/OGKUPjmPEx8
+- ![image](https://user-images.githubusercontent.com/112716905/213638908-7932da0f-8b10-47b6-a031-689e3db24063.png)
