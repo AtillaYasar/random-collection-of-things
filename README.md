@@ -41,3 +41,12 @@ name is self-explanatory... a bunch of my repos will probably end up here
 - little command line interface to find and print the table of contents of a .md file in the current directory
 - usage example here: https://youtu.be/OGKUPjmPEx8
 - ![image](https://user-images.githubusercontent.com/112716905/213638908-7932da0f-8b10-47b6-a031-689e3db24063.png)
+
+## prompting_tool
+- only a tkinter skeleton for now
+- (inspired by sudowrite, ) should eventually let you dynamically create prompts, combining multiple text editor windows and tabs, and output AI completions to multiple windows and tabs.
+- ![tool screenshot 20th jan](https://user-images.githubusercontent.com/112716905/213690569-2a6f4f8e-6f86-4fe3-a77b-5be11dda128a.png)
+  + the screenshot shows what's going on... if you can decypher it.
+  + a "generation request" (or AI completion) is done inside [generate] [/generate] text in the top left. and it has directions on where the prompt is, and where to send the output.
+  + it selects a prompt from a text editor (selected via window/tab combo), and sends the output to another editor (selected in the same way)
+  + as the last line of the top left window says, `{window name}.{tab index}` is the way an editor is selected (or located)
