@@ -50,3 +50,13 @@ name is self-explanatory... a bunch of my repos will probably end up here
   + a "generation request" (or AI completion) is done inside [generate] [/generate] text in the top left. and it has directions on where the prompt is, and where to send the output.
   + it selects a prompt from a text editor (selected via window/tab combo), and sends the output to another editor (selected in the same way)
   + as the last line of the top left window says, `{window name}.{tab index}` is the way an editor is selected (or located)
+- the code below shows how the layout is defined. so it is dynamic, as the windows are generated from this matrix, so it is designed to eventually be alterable from within the UI.
+```python
+layout_matrix = '''
+first_square second_sq
+first_in_second_row bottom_right
+'''[1:-1]
+matrix = []
+for line in layout_matrix.split('\n'):
+    matrix.append(line.split(' '))
+```
