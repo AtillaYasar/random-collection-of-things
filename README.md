@@ -1,15 +1,17 @@
 # random-collection-of-things
-name is self-explanatory... a bunch of my repos will probably end up here
-
-## Oracle
-- command line interface  
-- if you ask a question, returns 1 of 6 responses  
-- video showing it https://youtu.be/B7JihYaXU6s
+name is self-explanatory... most of my repos will probably end up here
 
 ## Ram aid + text editor with highlighting
 - https://github.com/AtillaYasar/mental-tools/
 - I'll put the files here some day.
 - extremely useful tool, i use it for almost every single task that requires thinking and/or oversight over a problem
+- AI extension: https://github.com/AtillaYasar/text-editor-OpenAI (should have been a fork or module or update or something..)
+- ![image](https://user-images.githubusercontent.com/112716905/213861946-c23ddd62-79f4-4aa3-a5ab-5a9bdb4edbdb.png)
+
+## Oracle
+- command line interface  
+- if you ask a question, returns 1 of 6 responses  
+- video showing it https://youtu.be/B7JihYaXU6s
 
 ## lets_all_stop_writing_html_and_css
 - it allows you to stop_writing_html_and_css
