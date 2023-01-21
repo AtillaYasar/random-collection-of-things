@@ -2,9 +2,8 @@
 name is self-explanatory... most of my repos will probably end up here
 
 ## Ram aid + text editor with highlighting
+- my favorite tool by far, i use it for almost every single task that requires thinking and/or oversight over any problem or chunk of text
 - https://github.com/AtillaYasar/mental-tools/
-- I'll put the files here some day.
-- extremely useful tool, i use it for almost every single task that requires thinking and/or oversight over a problem
 - AI extension: https://github.com/AtillaYasar/text-editor-OpenAI (should have been a fork or module or update or something..)
 - ![image](https://user-images.githubusercontent.com/112716905/213861946-c23ddd62-79f4-4aa3-a5ab-5a9bdb4edbdb.png)
 
