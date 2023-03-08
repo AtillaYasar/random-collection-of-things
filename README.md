@@ -36,6 +36,26 @@ name is self-explanatory... most of my repos will probably end up here
 - usage example here: https://youtu.be/OGKUPjmPEx8
 - ![image](https://user-images.githubusercontent.com/112716905/213638908-7932da0f-8b10-47b6-a031-689e3db24063.png)
 
+## discord_testing
+- very basic testing environment for discord.py.
+- uses this to simulate typing messages in discord:
+```python
+while True:
+  i = input
+  handle_input(i)
+```
+```python
+@command
+def _example_command(inp):
+    """Registers a command for sending a message.
+
+    Analogous to:
+    async def _example_command(ctx, *, inp):
+        await ctx.send(f'your input was:{inp}')
+    """
+    print(f'your input was:{inp}')
+```
+
 ## deleted because they suck:
 - lets_all_stop_writing_html_and_css
 - run_something.py
