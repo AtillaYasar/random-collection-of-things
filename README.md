@@ -12,13 +12,6 @@ name is self-explanatory... most of my repos will probably end up here
 - if you ask a question, returns 1 of 6 responses  
 - video showing it https://youtu.be/B7JihYaXU6s
 
-## lets_all_stop_writing_html_and_css
-- it allows you to stop_writing_html_and_css
-- example input: https://pastebin.com/yjVwMe1E  
-- example output html: https://pastebin.com/KjCp2aVY
-- example output css: https://pastebin.com/KdBGXzq0 
-- todo: a way to manage multiple pages, and have a shared css and js library. and auto-generate a full site. im working on a blog, so i am my own client here.
-
 ## pixiv
 - beautiful command line interface
 - download.py: download from pixiv
@@ -43,22 +36,7 @@ name is self-explanatory... most of my repos will probably end up here
 - usage example here: https://youtu.be/OGKUPjmPEx8
 - ![image](https://user-images.githubusercontent.com/112716905/213638908-7932da0f-8b10-47b6-a031-689e3db24063.png)
 
-## prompting_tool
-- only a tkinter skeleton for now. does not actually support AI completions yet.
-- (inspired by sudowrite, ) should eventually let you dynamically create prompts, combining multiple text editor windows and tabs, and output AI completions to multiple windows and tabs.
-- ![tool screenshot 20th jan](https://user-images.githubusercontent.com/112716905/213690569-2a6f4f8e-6f86-4fe3-a77b-5be11dda128a.png)
-  + the screenshot shows what's going on... if you can decypher it.
-  + a "generation request" (or AI completion) is done inside [generate] [/generate] text in the top left. and it has directions on where the prompt is, and where to send the output.
-  + it selects a prompt from a text editor (selected via window/tab combo), and sends the output to another editor (selected in the same way)
-  + as the last line of the top left window says, `{window name}.{tab index}` is the way an editor is selected (or located)
-- the code below shows how the layout is defined.
-  + it is dynamic, as the windows are generated from this matrix, and designed to eventually be configurable from within the app
-```python
-layout_matrix = '''
-first_square second_sq
-first_in_second_row bottom_right
-'''[1:-1]
-matrix = []
-for line in layout_matrix.split('\n'):
-    matrix.append(line.split(' '))
-```
+## deleted because they suck:
+- lets_all_stop_writing_html_and_css
+- run_something.py
+- prompting_tool
