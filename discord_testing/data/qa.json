@@ -1,0 +1,134 @@
+[
+  {
+    "question": "Is this considered a good resource? <https://docs.google.com/spreadsheets/d/1Jfxf10C_s8n4dcWYQ-kW_X1lVZEkz_ORSuEs-F3-v1U>",
+    "answer": "~~NO! GO AWAY WITH THAT DARN LIST IT WAS NEVER GOOD FOR CASUAL USE! IT'S BEEN OVER A YEAR! WHY DO PEOPLE STILL DIG THIS UP?~~\n\nThe link you posted contains inaccurate and outdated information. Do not use it!\nFor Euterpe and Krake there is a guide by pume_ that describes current best practices for memory (an important note is that you want to use keywords like those in Memory, not in Author's Note): <https://rentry.org/memory-guide>"
+  },
+  {
+    "question": "How do I subscribe/cancel my sub/upgrade?",
+    "answer": "Left side panel -> click little \u2699\ufe0f thing -> account"
+  },
+  {
+    "question": "When should I train an AI module vs use the lorebook?",
+    "answer": "Module is for theme, writing style and pace, they are quite bad at retaining knowledge.\nThis is where Lorebook enters the picture. Lorebook is basically a way to select information to be added to the context depending on what is already there, like putting a character attributes.\nThey are very different and can be used in synergy."
+  },
+  {
+    "question": "What does seed do?",
+    "answer": "<https://docs.novelai.net/image/basics.html#what-is-a-seed>"
+  },
+  {
+    "question": "What does a module do?",
+    "answer": "It writes text that looks like the text it was trained on."
+  },
+  {
+    "question": "Does NAI have a mobile app?",
+    "answer": "[ The following part needs some editing, but might provide a good base]\nIn the meantime this works pretty well: On Android you can open NAI on your browser, go to your browser options and use \"add to smartphone/home\" (will depend on browser what it's called)\n\nThis will create a link icon on your home screen. If you use that it will open in fullscreen and work as an app in most respected.\n\nApple has a similar function, but not sure how to access that."
+  },
+  {
+    "question": "Where image bot?",
+    "answer": "This server no longer has an image bot. You can, however, subscribe to <https://novelai.net/> to generate images with NAI diffusion. You can see examples of what the model is capable in #nai-diffusion-showcase"
+  },
+  {
+    "question": "Did NAI improve/dumb down the model?",
+    "answer": "All updates to the model are reported in #announcements. However, generative AI models are governed by randomness, meaning, \"some days seem better than others\".\n\nThe human brain is prone to perceive meaning in random information. You can read more about it here <https://en.wikipedia.org/wiki/Apophenia>"
+  },
+  {
+    "question": "How to open story download from NovelAI or transfer it to pdf?",
+    "answer": "right side panel -> first tab (story) -> scroll down to \"Export Story\" -> \"As Plaintext\""
+  },
+  {
+    "question": "hey does anyone know how to make the ai say detailed descriptions?",
+    "answer": "Relevant comment by Zaltys:\nLike so many other things, I have already implemented multiple solutions to this. But until the day that a new model is released \u2014 I can only say is that there's nothing that works reliably in the current version. Author tags in general are weak, and Style tagging was merely experimental in latest Krake.\nYou can try `[ Tags: slow burn ]`, but that might steer towards romance. \n\nIf you want a detailed description of a specific thing, worth to give this a read:\n<https://naidb.miraheze.org/wiki/Directing_the_Narrative>"
+  },
+  {
+    "question": "What's a ATTG and where do I find it?",
+    "answer": "preliminary answer...\n`[ Tags: purple prose, detailed, descriptive; Genre: romance ]`\nfor flowery/purple prose\n\n<https://rentry.org/memory-guide> especially at <https://rentry.org/memory-guide#full-tags>"
+  },
+  {
+    "question": "can a genre be anything?",
+    "answer": "(preliminary answer probably, just directly copying what okeri wrote)\n`Tags: comedic timing; Genre: parody` for example.\nGenres can also be put into Tags.\nBut it's like putting a whole meal as flavoring for another.\n\nFavorite use of this is having metaparody as a tag for fantasy like:\n`Tags: metaparody; Genre: fantasy`"
+  },
+  {
+    "question": "Since scenario sharing is archived here, is there any other place for it?",
+    "answer": "#novelai-content-sharing"
+  },
+  {
+    "question": "what is this question?",
+    "answer": "a test"
+  },
+  {
+    "question": "What is context?",
+    "answer": "(pre-answer, needs to be edited still)\nsimple: the text that is sent to the AI to continue generating off of\nextra details: [context viewer], [next token prediction], something something"
+  },
+  {
+    "question": "Hey, guys. If yall wanna ask the AI to describe something, how yall do it, usually?",
+    "answer": "`He looked at it, noticing all of the details. The grey` --> Send"
+  },
+  {
+    "question": "(version 2, and still preliminary) Hey, guys. If yall wanna ask the AI to describe something, how yall do it, usually?",
+    "answer": "One example:\n`He looked at it, noticing all of the details. The grey` --> Send\nThis page contains great advice:\n<https://naidb.miraheze.org/wiki/Directing_the_Narrative>\n(I'll have to extract things from here and rewrite them for the bot, at some point)"
+  },
+  {
+    "question": "Can I mix attributes and prose?",
+    "answer": "Words from Zaltys on mixing attributes and prose:\nhttps://discord.com/channels/836774308772446268/919724433013346324/1062869215834554429\nexamples he gives:\n```\n----\nName of Concept/Magic System\nType: concept, magic\n(...other categories)\nProse goes here.```\n```\n----\nEvent\nType: historical event\n(...other categories like `Year:`)\nProse here.```"
+  },
+  {
+    "question": "how to import?",
+    "answer": "(preliminary)\ndrag and drop anywhere\nImport button on the bottom of the story list if you're on phone"
+  },
+  {
+    "question": "How to do inner monologue and thoughts?",
+    "answer": "(not a final answer)\n<> seems to work. So like,\n> \"Aight bro it ain't no thing\" he said, waving his friend goodbye. <omg I can't believe he did this>"
+  },
+  {
+    "question": "What is the purpose of author notes?",
+    "answer": "(may be too long)\n**definition:**\n> text that's inserted 3 lines up from the bottom of the text that is sent to the ai (the context)\nso basically it always makes the context look like this: <https://cdn.discordapp.com/attachments/837402685824565278/1076907130545786910/image.png>\n\n**purpose:**\nIt doesn't have much of a purpose because it doesn't seem to work as you'd want actual \"author's notes\" to work."
+  },
+  {
+    "question": "What happened with AI dungeon?",
+    "answer": "sort of short version:\nIt was one the first available publicly available apps using gpt-3, using it for a text-adventure thing. The implementation of dungeon AI was laughably incompetent in many ways.\nThe introduction of a content filter frustrated many users enough to leave for the early beta of this service. Novel AI might not have been this successful if dungeon AI wouldn't have screwed up so badly.\n\nIf you really want to read more about it, it was here is an opinionated summary:\n<https://rentry.co/remember-what-they-took-from-you>"
+  },
+  {
+    "question": "[ info ] Belverk's scaffolding ideas",
+    "answer": "> - early screenshot by Belverk, that shows the idea *clearly and simply* in my opinon: <https://cdn.discordapp.com/attachments/837581164436258837/957308579000500285/unknown.png>, source: conversation in community-research\ufeff , link to conversation: <https://discord.com/channels/836774308772446268/837581164436258837/957308579973582849>\n> - it's a pretty deep rabbithole, but to learn more about it:\n>     + his latest stuff on it in novelai-content-sharing\ufeff : <https://discord.com/channels/836774308772446268/1067117526200365178>\n>     + search `from: Belverk#0722 scaffolding`"
+  },
+  {
+    "question": "[ info ] minimum lorebook json",
+    "answer": "bare minimum is { \"lorebookVersion\": 4} saved as json\nhere's a less bare version, with 3 lorebook entries:\n{\n  \"lorebookVersion\": 4,\n  \"entries\": [\n    {\n      \"text\": \"some text (without title)\"\n    },\n    {\n      \"displayName\": \"some title (of another entry, without text)\"\n    },\n    {\n      \"keys\": [\n        \"two\",\n        \"keys\",\n        \"and_nothing_else\"\n      ]\n    }\n  ]\n}\nscreenshot of result: <https://cdn.discordapp.com/attachments/837402685824565278/1078366883327254558/image.png>"
+  },
+  {
+    "question": "Is text gen abandoned?",
+    "answer": "no.\ncomment from tabloida on reddit: <https://www.reddit.com/r/NovelAi/comments/117yb4n/text_generation/j9ee4b4?utm_medium=android_app&utm_source=share&context=3>"
+  },
+  {
+    "question": "What would I use if I want the AI to remember the personality of a character?",
+    "answer": "using the mind or mental attribute in their lorebook\n\n(copied straight from lord zaltys)\n`Mental:` got trained on longer descriptions, so it's better when outputting randomly generated characters. So basically, the difference in random generation: \n```Mental: Zak is smart, determined, and resourceful. He has the ability to come up with quick plans for most problems, and a high tolerance for stress.```\n```Mind: Impulsive, impatient, curious, innocent```\nMental is more of a profile, Mind is a list."
+  },
+  {
+    "question": "[ info ] summary and outline",
+    "answer": "screenshots from OccultSage talking about outlining, and that it actually works.\n<https://cdn.discordapp.com/attachments/837402685824565278/1079529740836294736/image.png>\n<https://cdn.discordapp.com/attachments/837402685824565278/1079529741033418833/image.png>\n<https://cdn.discordapp.com/attachments/837402685824565278/1079529741276692562/image.png>\nhis post in #research:\n<https://discord.com/channels/836774308772446268/849299688905506816/860339140075061278>\n\nscreenshot from zaltys talking about using `Summary:` in memory\n<https://cdn.discordapp.com/attachments/1034215905133076511/1079111049539756032/image.png>"
+  },
+  {
+    "question": "is it against TOS to have a public discord bot to generate text with NAI?",
+    "answer": "5.3 Restrictions. Unless permitted in the Terms, you must not:\n\n5.3.1 Host an account on a publicly available domain;\n\n5.3.2 Allow third parties to access the account remotely;"
+  },
+  {
+    "question": "What are brackets and parantheses for? [] () {}",
+    "answer": "(almost exact) quote from <https://docs.novelai.net/image/strengthening-weakening.html>:\nYou can control the AI\u2019s finer focus during a generation by encasing the text you want to emphasize or weaken with `{ }` for strengthening, and `[ ]` for weakening."
+  },
+  {
+    "question": "test",
+    "answer": "abc"
+  },
+  {
+    "question": "Is text gen dead? We haven't seen any updates in a while even though you guys used to make updates every few days.",
+    "answer": "TabloidA\nyou are not mistaken\nhowever we are also not done working on text gen \n\nkurumuz:\nit wasn't definitely a few days, but we got a bunch of open models every few months. This is not the case anymore, there wasn't a release worthy of upgrading the models to, hence slowed progress"
+  },
+  {
+    "question": "[ info ] my understanding of embeddings and modules",
+    "answer": "Imagine having millions of ideas or concepts in your mind, but only having *words* for 1000 of them.\nThe tokenizer having 50k tokens is kinda like that.\n\nSince each token is turned into an embedding (technically a list of numbers), you have more freedom for creating concepts and ideas, than you do with those 50k tokens, which each corresponding to a very specific list of numbers.\n\nAnd that's why the module trainer can find 20 embeddings that capture the training data better than text could have captured it. (it has more freedom)"
+  },
+  {
+    "question": "does this work",
+    "answer": "yes"
+  }
+]
