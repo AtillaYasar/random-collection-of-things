@@ -1,3 +1,4 @@
+
 import os, sys
 
 def text_append(path, appendage):
@@ -21,34 +22,48 @@ def col(ft, s):
     n = numbers[ft]
     return f'{u}[{n}m{s}{u}[0m'
 
+default_py = '''
+"""
+import sys, json, copy, time, requests, os
+import tkinter as tk
+
+# my own modules
+## make available for import
+with open('module_path.txt', 'r') as f:
+    module_path = f.read()  # ../code_library
+sys.path.append(module_path)
+## then import
+from examples.draggable_circles import DraggableCircle
+from general_utils.for_colors import col
+from general_utils.misc import Recursion, HierarchyItem, message, is_empty
+from tkinter_utils.class_extensions import MyText
+"""
+'''[1:-1]
+
+default_html = '''
+<html>
+<body>
+
+<script src='...js' type='module'>
+</script>
+
+</body>
+</html>
+'''[1:-1]
+
 while True:
     print('-')
     print(col('cy', 'write a file name'))
     i = input()
     if i not in os.listdir():
-        if i.partition('.')[2] == 'html':
-            content = '\n'.join([
-                '<html>',
-                '<body>',
-                '',
-                '''<script src='...js' type='module'>''',
-                '</script>',
-                    '',
-                '</body>',
-                '</html>'
-                ])
+        ext = i.partition('.')[2]
+        if ext == 'html':
+            content = default_html
+        elif ext == 'py':
+            content = default_py
         else:
             content = ''
         text_create(i, content)
         print(col('gr',f'successfully created ') + f'{i}')
     else:
         print(col('re', 'cannot overwrite'))
-
-
-
-
-
-
-
-
-
