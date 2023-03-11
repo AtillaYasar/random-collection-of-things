@@ -1,3 +1,10 @@
+"""
+libraries
+    https://github.com/martin-majlis/Wikipedia-API
+    https://github.com/goldsmith/Wikipedia
+one gives search results but empty subsections :p  and the other cant do searches, but can show subsections.
+"""
+
 import wikipedia
 import wikipediaapi, json
 
