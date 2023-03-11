@@ -56,6 +56,11 @@ def _example_command(inp):
     print(f'your input was:{inp}')
 ```
 
+## wiki_poc.py
+- just something while playing around with the wikipedia and WikipediaAPI libraries.
+- poc stands for "proof of concept". it's mostly to show how to use these libraries, for myself and others  :)
+  + https://github.com/goldsmith/Wikipedia and https://github.com/martin-majlis/Wikipedia-API
+
 ## deleted because they suck:
 - lets_all_stop_writing_html_and_css
 - run_something.py
