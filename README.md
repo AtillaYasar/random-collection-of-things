@@ -60,6 +60,15 @@ def _example_command(inp):
 - just something while playing around with the wikipedia and WikipediaAPI libraries.
 - poc stands for "proof of concept". it's mostly to show how to use these libraries, for myself and others  :)
   + https://github.com/goldsmith/Wikipedia and https://github.com/martin-majlis/Wikipedia-API
+- it has 3 commands: search, hierarchy, content, below are aesthetic terminal screenshots showing it in use :)
+  + when you run it
+    - ![wiki on_open](https://user-images.githubusercontent.com/112716905/224471617-0a14198a-1949-465a-bf54-3f2e4c2ef10f.png)
+  + search  (to search pages)
+    - ![wiki searc res](https://user-images.githubusercontent.com/112716905/224471633-70fbb8a1-d417-4e32-82dc-cb076d6908bd.png)
+  + hierarchy  (to show a page's hierarchy)
+    - ![wiki hierarchy res](https://user-images.githubusercontent.com/112716905/224471651-20c7b7f2-ffed-4e1e-8819-52ce540baf4c.png)
+  + content  (to get content of a section or full page)
+    - ![wiki content res](https://user-images.githubusercontent.com/112716905/224471665-22777f4d-18cb-4bef-94fc-6397b3067211.png)
 
 ## deleted because they suck:
 - lets_all_stop_writing_html_and_css
