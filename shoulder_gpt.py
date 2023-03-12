@@ -25,21 +25,6 @@ def open_json(filename):
         f.close()
     return contents
 
-def col(ft, s):
-    """For printing text with colors.
-    
-    Uses ansi escape sequences. (ft is "first two", s is "string")"""
-    # black-30, red-31, green-32, yellow-33, blue-34, magenta-35, cyan-36, white-37
-    u = '\u001b'
-    numbers = dict([(string,30+n) for n, string in enumerate(('bl','re','gr','ye','blu','ma','cy','wh'))])
-    n = numbers[ft]
-    return f'{u}[{n}m{s}{u}[0m'
-
-url = "https://api.openai.com/v1/chat/completions"
-headers = {
-    "Content-Type": "application/json",
-    "Authorization": f"Bearer {openai_key}"
-}
 
 def get_path_cli():
     """Commandline interaction to traverse folders and retrieve a file path."""
@@ -80,11 +65,7 @@ def get_path_cli():
     default_color = 'wh'
 
     current_dir = os.getcwd()
-
     while True:
-        print()
-        print(f'--- current_dir={current_dir} ---')
-        print()
         # show filenames with colors
         tups = list(get_mapping(current_dir).items())
         for n, tup in enumerate(tups):
@@ -93,7 +74,15 @@ def get_path_cli():
             print(n, col(color, filename))
 
         print('write a number to get the path, or go into the folder.')
+        print()
+        print(f'--- current_dir={current_dir} ---')
+        print()
         n = input()
+        if n == 'up':
+            normal_path = os.path.abspath(current_dir)
+            upper = normal_path.split('\\')
+            current_dir = '\\'.join(upper[:-1])
+            continue
         try:
             int(n)
         except:
@@ -111,13 +100,34 @@ def get_path_cli():
 
     return path
 
+def col(ft, s):
+    """For printing text with colors.
+    
+    Uses ansi escape sequences. (ft is "first two", s is "string")"""
+    # black-30, red-31, green-32, yellow-33, blue-34, magenta-35, cyan-36, white-37
+    u = '\u001b'
+    numbers = dict([(string,30+n) for n, string in enumerate(('bl','re','gr','ye','blu','ma','cy','wh'))])
+    n = numbers[ft]
+    return f'{u}[{n}m{s}{u}[0m'
+
+url = "https://api.openai.com/v1/chat/completions"
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {openai_key}"
+}
+
+def print_colored(string, mapping):
+    lines = []
+    for line in string.split('\n'):
+        for string, color in mapping.items():
+            line = line.replace(string, col(color, string))
+        lines.append(line)
+    print('\n'.join(lines))
+
 def get_commentary(path, n=3, temperature=0.5):
-    if '/' in path:
-        filename = path.split('/')[-1]
-    elif '\\' in path:
-        filename = path.split('\\')[-1]
-    else:
-        filename = None
+    path = path.replace('/', '\\')
+    path = path.replace('\\', '/')
+    filename = path.split('/')[-1]
 
     code = text_read(path)
     system_message = '''
@@ -206,8 +216,32 @@ elif len(inp) == 4:
     temp = float(inp[3])
     args = [path, n, temp]
 else:
-    print(col('re','wrong args. pass a path followed by (optional) a small integer and a float between 0.0 and 1.5'))
-    exit()
+    #print(col('re','wrong args. pass a path followed by (optional) a small integer and a float between 0.0 and 1.5'))
+    #exit()
+    print(col('gr', 'wrong args. lets find the path.'))
+    path = get_path_cli()
+    
+    color_mapping = {
+        'def':'blu',
+        'return ':'ma',
+        'print(':'ye',
+        'len(':'ye',
+        'int(':'ye',
+        'class ':'cy',
+        '=':'gr',
+        'while ':'ma',
+        'for ':'ma',
+        'range(':'ye',
+        "'":'re',
+        '"':'re',
+    }
+    print(col('gr', '='*20))
+    print(col('gr', '='*20))
+    print(col('gr', '='*20))
+    print_colored(text_read(path), color_mapping)
+    args = [path, 3, 0.8]
+    print(f'args:{args}')
+    i = input('continue?\n')
 ext = path.split('.')[-1]
 
 if ext == 'py':
