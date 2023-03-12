@@ -41,6 +41,76 @@ headers = {
     "Authorization": f"Bearer {openai_key}"
 }
 
+def get_path_cli():
+    """Commandline interaction to traverse folders and retrieve a file path."""
+
+    def col(ft, s):
+        """For printing text with colors.
+        
+        Uses ansi escape sequences. (ft is "first two", s is "string")"""
+        # black-30, red-31, green-32, yellow-33, blue-34, magenta-35, cyan-36, white-37
+        u = '\u001b'
+        numbers = dict([(string,30+n) for n, string in enumerate(('bl','re','gr','ye','blu','ma','cy','wh'))])
+        n = numbers[ft]
+        return f'{u}[{n}m{s}{u}[0m'
+
+    def get_type(path):
+        if os.path.isdir(path):
+            typ = 'dir'
+        else:
+            ext = path.split('.')[-1]
+            typ = ext
+        return typ
+
+    def get_mapping(directory):
+        assert os.path.isdir(directory)
+
+        mapping = {}
+        for f in os.listdir(directory):
+            path = f'{directory}/{f}'
+            typ = get_type(path)
+            mapping[f] = typ
+        return mapping
+
+    type_to_col = {
+        'py':'cy',
+        'dir':'ye',
+        'txt':'gr',
+    }
+    default_color = 'wh'
+
+    current_dir = os.getcwd()
+
+    while True:
+        print()
+        print(f'--- current_dir={current_dir} ---')
+        print()
+        # show filenames with colors
+        tups = list(get_mapping(current_dir).items())
+        for n, tup in enumerate(tups):
+            filename, typ = tup
+            color = type_to_col.get(typ, default_color)
+            print(n, col(color, filename))
+
+        print('write a number to get the path, or go into the folder.')
+        n = input()
+        try:
+            int(n)
+        except:
+            print(col('re', 'use an integer.'))
+            exit()
+        else:
+            n = int(n)
+        chosen_name, chosen_type = tups[n]
+        if chosen_type == 'dir':
+            current_dir += f'/{chosen_name}'
+            continue
+        else:
+            path = f'{current_dir}/{chosen_name}'
+            break
+
+    return path
+
 def get_commentary(path, n=3, temperature=0.5):
     if '/' in path:
         filename = path.split('/')[-1]
