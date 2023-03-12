@@ -77,4 +77,6 @@ def _example_command(inp):
 - ![Schermopname (7)](https://user-images.githubusercontent.com/112716905/224529114-c29420f4-28cf-49a1-b43c-f8fa3a72da19.png)
 - ![Schermopname (8)](https://user-images.githubusercontent.com/112716905/224535016-9184863b-79b7-4d46-9c46-4dbacc7871bc.png)
 
+## wiki_emb
+- will let you search for and view wikipedia articles, embed paragraphs contained, and search embeddings, and maintain a database of embeddings
 
