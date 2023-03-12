@@ -125,6 +125,38 @@ def print_colored(string, mapping):
     print('\n'.join(lines))
 
 def get_commentary(path, n=3, temperature=0.5):
+
+    mock = False  # for testing, so i dont have to wait for the api.
+    if mock:
+        fake_data = {
+            'messages':[
+                {
+                    'role':'system',
+                    'content':'your mom',
+                },
+                {
+                    'role':'user',
+                    'content':'yo',
+                },
+                {
+                    'role':'assistant',
+                    'content':'as a large language model, i cannot engage in interactions with or about, your mother.',
+                },
+            ]
+        }
+        fake_response = ''
+        fake_output = 'raw'
+        fake_ass = [f'fake resp {n}' for n in range(n)]
+        fake_pretty = '\n'.join([f'{item}\n------\n' for item in fake_ass])
+        return {
+            'raw inputs':fake_data,
+            'raw json':fake_output,
+            'messages':fake_data['messages'],
+            'assistant responses':fake_ass,
+            'pretty print':fake_pretty,
+        }
+
+    
     path = path.replace('/', '\\')
     path = path.replace('\\', '/')
     filename = path.split('/')[-1]
@@ -202,6 +234,25 @@ I am not sure, but...
         'pretty print':pretty_print,
     }
 
+# for additional interactions with turbo-kun.
+def talk_again(messages_lod, n=3, temperature=0.5):
+    data = {
+        "model":"gpt-3.5-turbo",
+        'messages':messages_lod,
+        'n':n,
+        'temperature':temperature,
+    }
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    raw_json = response.json()
+    assistant_responses = [choice['message']['content'] for choice in raw_json['choices']]
+
+    return {
+        'raw input':data,
+        'raw json':raw_json,
+        'assistant responses':assistant_responses,
+        'messages':data['messages'],
+    }
+
 inp = sys.argv
 if len(inp) == 2:
     path = inp[1]
@@ -219,29 +270,38 @@ else:
     #print(col('re','wrong args. pass a path followed by (optional) a small integer and a float between 0.0 and 1.5'))
     #exit()
     print(col('gr', 'wrong args. lets find the path.'))
-    path = get_path_cli()
-    
-    color_mapping = {
-        'def':'blu',
-        'return ':'ma',
-        'print(':'ye',
-        'len(':'ye',
-        'int(':'ye',
-        'class ':'cy',
-        '=':'gr',
-        'while ':'ma',
-        'for ':'ma',
-        'range(':'ye',
-        "'":'re',
-        '"':'re',
-    }
-    print(col('gr', '='*20))
-    print(col('gr', '='*20))
-    print(col('gr', '='*20))
-    print_colored(text_read(path), color_mapping)
-    args = [path, 3, 0.8]
-    print(f'args:{args}')
-    i = input('continue?\n')
+    while True:
+        path = get_path_cli()
+        
+        color_mapping = {
+            'def':'blu',
+            'return ':'ma',
+            'print(':'ye',
+            'len(':'ye',
+            'int(':'ye',
+            'class ':'cy',
+            '=':'gr',
+            'while ':'ma',
+            'for ':'ma',
+            'range(':'ye',
+            "'":'re',
+            '"':'re',
+        }
+        print(col('gr', '='*20))
+        print(col('gr', '='*20))
+        print(col('gr', '='*20))
+        print_colored(text_read(path), color_mapping)  # prints code with some text colored as instructed by color_mapping
+        args = [path, 3, 0.8]
+        print(f'args:{args}')
+        i = input('continue? (yes/no)\n')
+        if i == 'yes':
+            print('calling api...')
+            break
+        elif i == 'no':
+            print('going again.')
+        else:
+            print(col('re', 'bruh i said "yes or no"'))
+        
 ext = path.split('.')[-1]
 
 if ext == 'py':
@@ -261,5 +321,41 @@ if ext == 'py':
         for rep in ass_reps:
             print(col('cy', rep))
             print(col('gr', '-_'*20))
+
+    # continue with additional interactions, using def talk_again
+    current_messages = commentary['messages']
+    assistant_responses = commentary['assistant responses']
+    while True:
+        i = input(col('gr','If you want to talk again, write the number of the message to respond to.\n'))
+        print('-')
+        try:
+            assistant_responses[int(i)]
+        except:
+            print(col('re', 'wrong nombah init'))
+            continue
+        else:
+            chosen_version = assistant_responses[int(i)]
+            print(f'you chose:\n{chosen_version}')
+        i = input(col('gr','Write your response.\n'))
+        print('-')
+        for tup in [('assistant',chosen_version), ('user',i)]:
+            current_messages.append({'role':tup[0], 'content':tup[1]})
+        
+        returned_dict = talk_again(current_messages)  # call api.
+
+        assistant_responses = returned_dict['assistant responses']
+
+        # print stuff
+        ## for diagnostics.
+        print('raw input', returned_dict['raw input'])
+        print('raw output', returned_dict['raw json'])
+
+        ## showing gpt responses.
+        for response in assistant_responses:
+            print(col('gr', '-_'*20))
+            print(col('ye', response))
+
+        # prepare for next iteration of loop
+        current_messages = returned_dict['messages']
 else:
     print('extension must be python')
