@@ -75,7 +75,7 @@ def get_path_cli():
 
         print('write a number to get the path, or go into the folder.')
         print()
-        print(f'--- current_dir={col("gr",current_dir)} ---')
+        print(f'--- current_dir={col("ye",current_dir)} ---')
         print()
         n = input()
         if n == 'up':
