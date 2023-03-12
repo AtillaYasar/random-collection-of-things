@@ -75,9 +75,6 @@ def _example_command(inp):
 - i dont feel like explaining.
 - just run it. itll be cool.
 - ![Schermopname (7)](https://user-images.githubusercontent.com/112716905/224529114-c29420f4-28cf-49a1-b43c-f8fa3a72da19.png)
+- ![Schermopname (8)](https://user-images.githubusercontent.com/112716905/224535016-9184863b-79b7-4d46-9c46-4dbacc7871bc.png)
 
 
-## deleted because they suck:
-- lets_all_stop_writing_html_and_css
-- run_something.py
-- prompting_tool
