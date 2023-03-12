@@ -74,6 +74,8 @@ def _example_command(inp):
 - "gpt on your shoulder"
 - i dont feel like explaining.
 - just run it. itll be cool.
+- ![Schermopname (7)](https://user-images.githubusercontent.com/112716905/224529114-c29420f4-28cf-49a1-b43c-f8fa3a72da19.png)
+
 
 ## deleted because they suck:
 - lets_all_stop_writing_html_and_css
