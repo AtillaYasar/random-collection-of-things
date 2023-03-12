@@ -70,6 +70,11 @@ def _example_command(inp):
   + content  (to get content of a section or full page)
     - ![wiki content res](https://user-images.githubusercontent.com/112716905/224471665-22777f4d-18cb-4bef-94fc-6397b3067211.png)
 
+## shoulder_gpt.py
+- "gpt on your shoulder"
+- i dont feel like explaining.
+- just run it. itll be cool.
+
 ## deleted because they suck:
 - lets_all_stop_writing_html_and_css
 - run_something.py
