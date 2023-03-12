@@ -42,6 +42,13 @@ headers = {
 }
 
 def get_commentary(path, n=3, temperature=0.5):
+    if '/' in path:
+        filename = path.split('/')[-1]
+    elif '\\' in path:
+        filename = path.split('\\')[-1]
+    else:
+        filename = None
+
     code = text_read(path)
     system_message = '''
 Your job is to be my assistant that is always watching over my shoulder as I write Python code.
@@ -63,6 +70,8 @@ Interesting or strange:
 I am not sure, but...
 '''[1:-1]
     user_part = 'so.. heres the code im writing right now, i want your analysis.'
+    if filename != None:
+        user_part += '\n\n' + filename
     code_part = f'```python\n{code}\n```'
     data = {
         "model":"gpt-3.5-turbo",
@@ -105,6 +114,7 @@ I am not sure, but...
     pretty_print = '\n'.join(pp_lines)
 
     return {
+        'raw inputs':data,
         'raw json':raw_json,
         'messages':data['messages'],
         'code':code,
@@ -132,6 +142,11 @@ ext = path.split('.')[-1]
 
 if ext == 'py':
     commentary = get_commentary(*args)
+    # for checking things.
+    print(col('blu', 'raw inputs'))
+    print(json.dumps(commentary['raw inputs'], indent=2))
+    print(col('blu', 'raw output json'))
+    print(json.dumps(commentary['raw json'], indent=2))
     if 'pretty print' in commentary:
         print(commentary['pretty print'])
     else:
