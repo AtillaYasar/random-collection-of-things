@@ -1,13 +1,14 @@
-from pytube import YouTube
+from pytube import YouTube, Playlist
 
-# making something beautiful into something ugly, for the sake of convenience..
 class PytubeHandler:
     """Reducing the pytube api down to a couple simple things I want to do with it."""
 
     def __init__(self):
         self.downloadables = []
 
-    def get_stuff_from_link(self, link):
+    def get_stuff_from_link(self, link:str, to_get:[
+        'title', 'description', 'channel url', 'length', 'downloadables',
+    ]):
         """
         Will return a dictionary containing info about the linked Youtube video.
 
@@ -20,7 +21,7 @@ class PytubeHandler:
 
         # define what the result contains
         result = {}
-        to_get = ['title', 'description', 'channel url', 'length', 'downloadables']
+        # to_get = ['title', 'description', 'channel url', 'length', 'downloadables']
 
         # things from the YouTube object
         yt = YouTube(link)  # pytube.YouTube object        
@@ -37,15 +38,10 @@ class PytubeHandler:
         from_stream = []
         for item in sq_f:
             from_stream.append({
-                'title': item.title,
-                'resolution': item.resolution,
-            })
-            self.downloadables.append({
                 'stream object': item,
                 'title': item.title,
                 'resolution': item.resolution,
             })
-
 
         # use to_get to .... get things.
         available_things = {
@@ -61,3 +57,26 @@ class PytubeHandler:
             if k in to_get:  # filter using to_get
                 result[k] = v
         return result
+    
+    def download_720p(self, link:str):
+        """Easy version of the full downloading capabilities."""
+
+        success = False
+        downloadables = self.get_stuff_from_link(link, ['title', 'downloadables'])['downloadables']
+        for item in downloadables:
+            if item['resolution'] == '720p':
+                print(f'start downloading {item["title"]}')
+                item['stream object'].download()
+                success = True
+                break
+        
+        if success:
+            print(f'download of {item["title"]} finished')
+        else:
+            print(f'could not get 720p for {item["title"]}')
+
+myra_list = 'https://www.youtube.com/playlist?list=PLU_8MEhMgb7RHhLujJ8YdZZs3rNv6Xp6p'
+ph = PytubeHandler()
+
+to_try = Playlist(myra_list)[0]
+ph.download_720p(to_try)
