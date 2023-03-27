@@ -80,3 +80,5 @@ def _example_command(inp):
 ## wiki_emb
 - will let you search for and view wikipedia articles, embed paragraphs contained, and search embeddings, and maintain a database of embeddings
 
+## pytube_wrapper.py
+just lets you see things. oh and you can call .download() on the stream objects in PytubeWrapper.downloadables
