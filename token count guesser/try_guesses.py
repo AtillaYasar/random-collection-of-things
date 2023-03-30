@@ -51,3 +51,5 @@ for item in collection:
 factors = sorted(factors, key=lambda x: x[0])
 for triplet in factors:
     print(triplet[0], triplet[1]/triplet[2])
+
+# conclusion: with over 4k chars, the fraction of tokens to words is probably about 1.2, as it goes from 1.1 to 1.3 between 500 and 4k chars, and is stable-ish around 1.2.
