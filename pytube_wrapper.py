@@ -2,6 +2,10 @@ from pytube import YouTube, Playlist
 from overall_imports import*
 import json, os, sys
 
+class DatabaseHandler:
+    def __init__(self):
+        pass
+
 # making something beautiful into something ugly, for the sake of convenience..
 class PytubeHandler:
     """Reducing the pytube api down to a couple simple things I want to do with it."""
@@ -10,7 +14,7 @@ class PytubeHandler:
         self.downloadables = []
 
     def get_stuff_from_link(self, link:str, to_get:[
-        'title', 'description', 'channel url', 'length', 'downloadables',
+        'title', 'description', 'channel url', 'length', 'downloadables', 'only_progressive'
     ]):
         """
         Will return a dictionary containing info about the linked Youtube video.
@@ -37,7 +41,12 @@ class PytubeHandler:
 
         # things from the Streams and StreamsQuery objects
         sq = yt.streams  # StreamsQuery object
-        sq_f = sq.filter(progressive=True)  # filter for progressive. will limit to 720p, and make sjws happy
+        if 'only_progressive' in to_get:
+            only_progressive = True
+            to_get.remove('only_progressive')
+        else:
+            only_progressive = False
+        sq_f = sq.filter(progressive=only_progressive)  # filter for progressive. will limit to 720p, and make sjws happy
         from_stream = []
         for item in sq_f:
             from_stream.append({
@@ -61,18 +70,23 @@ class PytubeHandler:
                 result[k] = v
         return result
     
+    def _download_720p(self, stream_object, folderpath:str):
+        """Helper for download_720p."""
+        stream_object.download(output_path = folderpath)
+    
     def download_720p(self, link:str, folderpath=None):
         """Easy version of the full downloading capabilities."""
 
         success = False
-        downloadables = self.get_stuff_from_link(link, ['title', 'downloadables'])['downloadables']
+        downloadables = self.get_stuff_from_link(link, ['title', 'downloadables', 'only_progressive'])['downloadables']
         for item in downloadables:
             if item['resolution'] == '720p':
                 print(f'start downloading {item["title"]}')
                 if folderpath == None:
-                    item['stream object'].download()
+                    folderpath = os.getcwd()
+                    self._download_720p(item['stream object'], folderpath)
                 else:
-                    item['stream object'].download(output_path = folderpath)
+                    self._download_720p(item['stream object'], folderpath)
                 success = True
                 break
 
@@ -80,6 +94,42 @@ class PytubeHandler:
             print(f'download of {item["title"]} finished')
         else:
             print(f'could not get 720p for {item["title"]}')
+    
+    def _download_audio(self, stream_object, folderpath:str):
+        """Helper for download_audio."""
+        stream_object.download(output_path = folderpath)
+
+    def download_audio(self, link:str, folderpath=None):
+        """Just send a link and get the audio."""
+
+        # just checking how this stuff works..
+
+        downloadables = self.get_stuff_from_link(link, ['title', 'downloadables'])['downloadables']
+        relevant_stream_objects = []
+        for item in downloadables:
+            title = item['title']
+            mime_type = item['stream object'].mime_type
+            quality = item['stream object'].abr
+            if mime_type == 'audio/mp4' and quality != None:
+                relevant_stream_objects.append({
+                    'object': item['stream object'],
+                    'quality': quality.split('kbps')[0],
+                    'title': title,
+                })
+        
+        relevant_stream_objects.sort(key=lambda x: int(x['quality']), reverse=True)
+        print('available qualities:')
+        for item in relevant_stream_objects:
+            print(item['quality'])
+            print(item['title'])
+            print()
+        
+        highest_q = relevant_stream_objects[0]['object']
+        if folderpath == None:
+            folderpath = os.getcwd()
+            self._download_audio(highest_q, folderpath)
+        else:
+            self._download_audio(highest_q, folderpath)
 
 def download_playlist(handler_object, link):
     """Uses PytubeHandler.download_720p. Makes a folder for the download."""
@@ -114,8 +164,14 @@ def download_playlist(handler_object, link):
     
     print('completed all downloads.')
 
-myra_list = 'https://www.youtube.com/playlist?list=PLU_8MEhMgb7RHhLujJ8YdZZs3rNv6Xp6p'
-ph = PytubeHandler()
-download_playlist(ph, myra_list)
+# for testing
+## note: above class worked for playlists, before i changed it, havent tested after change.
+## after the change, both audio and video work for the linked video.
+if True:
+    zachstar_vid = 'https://www.youtube.com/watch?v=uiCpTC0VMV0&'
+    ph = PytubeHandler()
+    ph.download_audio(zachstar_vid)
+    ph.download_720p(zachstar_vid)
+
 
 
