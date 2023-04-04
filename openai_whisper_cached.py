@@ -35,7 +35,7 @@ class Cache:
         self.save_cache()
 
 def get_transcript(path, response_format):
-    assert response_format in ['srt', 'text']
+    assert response_format in ['srt', 'text', 'verbose_json', 'json', 'vtt']
 
     cached = cache.get(
         {
@@ -61,11 +61,72 @@ def get_transcript(path, response_format):
 
     return transcript
 
-openai.api_key = openai_key
+# helper function for processing the transcript
+# what the api output looks like:
+# 00:00:00,000 --> 00:00:01,000
+'''
+1
+00:00:00,000 --> 00:00:02,000
+This video was sponsored by Upside.
 
-cache = Cache('whisper_cache.json')
+2
+00:00:04,480 --> 00:00:06,480
+Are you sure we're going the right way?
 
-path = 'whisper_test.mp4'
-transcript = get_transcript(path, 'srt')
-# print(transcript)
+3
+00:00:06,480 --> 00:00:08,480
+I think so, but...
 
+etc
+'''
+def process_srt_string(srt):
+    def to_seconds(time):
+        h, m, pre_s = time.split(':')
+        h = int(h)
+        m = int(m)
+        pre_s, ms = pre_s.split(',')
+        while True:
+            if len(pre_s) == 0:
+                pre_s = '0'
+                break
+            if pre_s[0] == '0':
+                pre_s = pre_s[1:]
+            else:
+                break
+        s = int(pre_s)
+        ms = int(ms)
+        return h*3600 + m*60 + s + ms/1000
+
+    info = []
+    blocks = srt.split('\n\n')
+    for b in blocks:
+        lines = b.split('\n')
+        if len(lines) != 3:
+            continue
+        idx = lines[0]
+        time_range = lines[1]
+        text = lines[2]
+        start, end = time_range.split(' --> ')
+
+        # convert to seconds
+        start = to_seconds(start)
+        end = to_seconds(end)
+
+        info.append({
+            'start': start,
+            'end': end,
+            'text': text,
+        })
+    return info
+
+# for testing
+if True:
+    openai.api_key = openai_key
+    cache = Cache('whisper_cache.json')
+
+    path = 'whisper_test.mp4'
+    transcript = get_transcript(path, 'srt')
+
+    processed = process_srt_string(transcript)
+    print(json.dumps(processed, indent=2))
+    print(transcript)
