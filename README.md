@@ -100,4 +100,5 @@ lil writing tool with these features:
     - example usage:
       + ![image](https://user-images.githubusercontent.com/112716905/231696973-80f95250-2a2a-449b-befc-50e895b22890.png)
       + ![image](https://user-images.githubusercontent.com/112716905/231697059-440d4b6c-dc76-49db-a704-7d696b2c7d69.png)
+- if this writing tool seems shittily written and hacked together, that's because it is. copilot is an amazing tool  :)
 
