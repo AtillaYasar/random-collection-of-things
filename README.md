@@ -82,3 +82,22 @@ def _example_command(inp):
 
 ## pytube_wrapper.py
 for now, just lets you see things about a Youtube video. oh and you can call .download() on the stream objects in PytubeWrapper.downloadables
+
+## writing-tool-gpt
+lil writing tool with these features:
+- display selected word count if selected, otherwise global word count
+- headers are in the listbox to the right, and you can click the to go to that text
+  + press Escape to update the listbox
+  + press Enter in the listbox to go to that line in the middle (main) textbox
+- navigate boxes with alt + up/down/left/right
+- in the rightmost you can write chatgpt context
+  + press ctrl+1/2/3 to add "system"/"assistant"/"user" messages
+  + press ctrl+r to remove the last message
+  + press ctrl+g to call chatgpt api
+  + 2 "placeholders":
+    - {selected}, will put mouse-selected text in there
+    - {instruction}, will put text from the entry box in there
+    - example usage:
+      + ![image](https://user-images.githubusercontent.com/112716905/231696973-80f95250-2a2a-449b-befc-50e895b22890.png)
+      + ![image](https://user-images.githubusercontent.com/112716905/231697059-440d4b6c-dc76-49db-a704-7d696b2c7d69.png)
+
