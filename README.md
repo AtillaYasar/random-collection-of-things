@@ -101,4 +101,4 @@ lil writing tool with these features:
       + ![image](https://user-images.githubusercontent.com/112716905/231696973-80f95250-2a2a-449b-befc-50e895b22890.png)
       + ![image](https://user-images.githubusercontent.com/112716905/231697059-440d4b6c-dc76-49db-a704-7d696b2c7d69.png)
 - if this writing tool seems shittily written and hacked together, that's because it is. copilot is an amazing tool  :)
-
+- press ctrl+s in the "main" text to save to "word_counter.txt", and in the right box to save to "script.json", and then you can do ctrl+b in the right box to make a backup of the script. (because you might want multiple scripts)
