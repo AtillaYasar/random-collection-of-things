@@ -155,6 +155,12 @@ def on_listbox_select(event):
         text_box.tag_add('to_highlight', f'{line}.0', f'{line}.0 lineend')
         text_box.tag_config('to_highlight', foreground='yellow')
 
+def main_on_mouse_release(event):
+    # display global word count if nothing is selected
+    if get_selected(text_box) == None:
+        words = text_box.get("1.0", "end")[:-1].split(' ')
+        word_count.config(text="Word Count: " + str(len(words)))
+
 def listbox_on_keypress(event):
     # go to selected header on enter
     if event.keysym == 'Return':
@@ -240,6 +246,7 @@ window.bind('<KeyPress>', window_on_keypress)
 text_box.bind('<KeyPress>', main_on_keypress)
 right_text.bind('<KeyPress>', rightbox_on_keypress)
 listbox.bind('<KeyPress>', listbox_on_keypress)
+text_box.bind('<ButtonRelease>', main_on_mouse_release)
 
 update_listbox()
 
