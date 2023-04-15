@@ -1,6 +1,7 @@
 import tkinter as tk
 import os, json, time
 from overall_imports import make_json, open_json
+from tkinter import ttk
 
 from chatgpt_stuff import Chatbot
 
@@ -48,6 +49,9 @@ def main_on_keypress(event):
             replacements = {
                 '{instruction}': instruction,
                 '{selected}': selected,
+                '{1}': thingy.get('1'),
+                '{2}': thingy.get('2'),
+                '{3}': thingy.get('3'),
             }
             for n, message in enumerate(messages):
                 for k, v in replacements.items():
@@ -249,6 +253,86 @@ listbox.bind('<KeyPress>', listbox_on_keypress)
 text_box.bind('<ButtonRelease>', main_on_mouse_release)
 
 update_listbox()
+
+# basically a toggleable text editor
+class Thingy:
+    def __init__(self, content=''):
+        self.exists = False
+        self.current_tab = None
+        self.tab_amount = 3
+
+        self.tab_contents = {str(n):{'widget':'', 'content':''} for n in range(1, self.tab_amount+1)}
+        
+        self.all_windows = [window]
+        for w in self.all_windows:
+            w.bind('<KeyPress>', self.on_press, add='+')
+
+    # toggle the window
+    def toggle(self, f_number):
+        if self.exists: # store content, destroy widgets
+            if f_number != self.current_tab:
+                pass
+            else:
+                for n, info in self.tab_contents.items():
+                    self.tab_contents[n]['content'] = info['widget'].get(1.0, 'end')[:-1]
+                self.w.destroy()
+                self.exists = False
+                self.current_tab = None
+        else: # re-create, re-insert content, re-bind on_press
+            self.w = tk.Toplevel()
+            self.w.config(background = 'black')
+
+            self.nb = ttk.Notebook(self.w)
+
+            # create tabs of text widgets
+            for n, info in self.tab_contents.items():
+                textSettings = {'width': 50, 'height': 25, 'font': ("comic sans", 14), 'bg': 'black', 'fg': 'white', 'insertbackground': 'white', 'selectbackground': 'white', 'selectforeground': 'black'}
+                text_widget = tk.Text(self.nb, **textSettings)
+                self.tab_contents[n]['widget'] = text_widget
+                text_widget.insert(1.0, info['content'])
+                
+                self.nb.add(text_widget, text=f'- F{n} -')
+
+            self.nb.pack()
+            
+            self.w.bind('<KeyPress>', self.on_press)
+            self.nb.bind('<KeyPress>', self.on_press)
+            self.exists = True
+            self.current_tab = f_number
+            
+    def on_press(self, event):
+        n = event.keysym.partition('F')[2]
+        if n in self.tab_contents:
+            self.toggle(n)
+
+            if self.exists:
+                tab_id = int(n)-1
+                self.nb.select(tab_id)
+
+                self.tab_contents[n]['widget'].focus_set()
+                self.current_tab = n
+        elif event.keysym == 's' and event.state == 12:
+            self.save()
+    
+    def save(self):
+        contents = list(map(lambda v:v['widget'].get(1.0, 'end')[:-1], self.tab_contents.values()))
+        print(contents)
+        path = 'thingy.json'
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(contents, f, indent=4)
+    
+    def get(self, key):
+        if key in self.tab_contents:
+            return self.tab_contents[key]['widget'].get(1.0, 'end')[:-1]
+        else:
+            print(f'key {key} not found')
+            return None
+
+thingy = Thingy()
+
+
+
+
 
 # start the program
 window.mainloop()
