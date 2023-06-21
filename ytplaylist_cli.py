@@ -63,7 +63,7 @@ while True:
 
     while True:
         # get choice
-        i = input('write a number to pick again, or r to reshuffle. ')
+        i = input('write a number to pick, or r to reshuffle. ')
         if i == 'r':
             break
         try:
