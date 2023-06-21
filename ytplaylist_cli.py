@@ -45,14 +45,14 @@ def search_google(search_term):
 
 # get playlist
 url = 'https://www.youtube.com/playlist?list=PLYpZzg5x9QczXFsI-0G5z6npJl9vqymHW'
-n = 10
+top_n = 10
 playlist = get_yt_playlist(url)
 
 # start cli
 while True:
-    #
+    # shuffle and display choices
     random.shuffle(playlist)
-    for n, item in enumerate(playlist[:n]):
+    for n, item in enumerate(playlist[:top_n]):
         title, link = item
         print(', '.join([
             col('gr', f'({n+1})'),
