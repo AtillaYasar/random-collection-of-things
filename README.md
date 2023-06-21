@@ -102,3 +102,8 @@ lil writing tool with these features:
       + ![image](https://user-images.githubusercontent.com/112716905/231697059-440d4b6c-dc76-49db-a704-7d696b2c7d69.png)
 - if this writing tool seems shittily written and hacked together, that's because it is. copilot is an amazing tool  :)
 - press ctrl+s in the "main" text to save to "word_counter.txt", and in the right box to save to "script.json", and then you can do ctrl+b in the right box to make a backup of the script. (because you might want multiple scripts)
+
+## ytplaylist_cli.py
+- lets you shuffle and pick from, a youtube playlist, then opens the video and searches for lyrics with the video title (because im personally using it for music)
+- ![Screenshot_2](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/46633647-599e-4908-8a1e-2f0f4af0aa8f)
+- ![Screenshot_3](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/f35bb6ca-0b92-4fd7-a05b-e40928adf03c)
