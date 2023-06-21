@@ -52,14 +52,16 @@ playlist = get_yt_playlist(url)
 while True:
     # shuffle and display choices
     random.shuffle(playlist)
+    lines = []
     for n, item in enumerate(playlist[:top_n]):
         title, link = item
-        print(', '.join([
+        lines.append(', '.join([
             col('gr', f'({n+1})'),
             col('cy', title),
             link,
         ]))
-    print('---')
+    lines.append('---')
+    print('\n'.join(lines))
 
     while True:
         # get choice
