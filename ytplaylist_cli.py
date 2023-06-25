@@ -1,6 +1,6 @@
 from youtubesearchpython import Playlist
 import webbrowser
-import random
+import random, sys
 
 def col(ft, s):
     """For printing text with colors.
@@ -41,41 +41,57 @@ def search_google(search_term):
     url = f'https://www.google.com/search?q={search_term}'
     open_chrome_tab(url)
 
-# can feed playlist url via sys.argv or input() if you want.
-
-# get playlist
-url = 'https://www.youtube.com/playlist?list=PLYpZzg5x9QczXFsI-0G5z6npJl9vqymHW'
-top_n = 10
-playlist = get_yt_playlist(url)
-
-# start cli
-while True:
-    # shuffle and display choices
-    random.shuffle(playlist)
-    lines = []
-    for n, item in enumerate(playlist[:top_n]):
-        title, link = item
-        lines.append(', '.join([
-            col('gr', f'({n+1})'),
-            col('cy', title),
-            link,
-        ]))
-    lines.append('---')
-    print('\n'.join(lines))
-
+def start_cli(url, top_n):
+    playlist = get_yt_playlist(url)
+    print(f'total links: {len(playlist)}')
     while True:
-        # get choice
-        i = input('write a number to pick, or r to reshuffle. ')
-        if i == 'r':
-            break
-        try:
-            choice = playlist[int(i)-1]
-        except:
-            print('invalid input')
-            continue
+        # shuffle and display choices
+        lines = []
+        lines.append(col('ma', '-'*20))
+        random.shuffle(playlist)
+        for n, item in enumerate(playlist[:top_n]):
+            title, link = item
+            lines.append(', '.join([
+                col('gr', f'({n+1})'),
+                col('cy', title),
+                link,
+            ]))
+        lines.append(col('ma', '-'*20))
+        print('\n'.join(lines))
 
-        # open video and search lyrics
-        title, link = choice
-        open_chrome_tab(link)
-        search_google(f'{title} lyrics')
+        while True:
+            # get choice
+            i = input('write a number to pick, or r to reshuffle. ')
+            if i == 'r':
+                break
+            try:
+                choice = playlist[int(i)-1]
+            except:
+                print('invalid input')
+                continue
 
+            # open video and search lyrics
+            title, link = choice
+            open_chrome_tab(link)
+            search_google(f'{title} lyrics')
+
+if __name__ == '__main__':
+    args = sys.argv[1:]
+
+    values = {
+        'url': 'https://www.youtube.com/playlist?list=PLT7fOIbmynt3Q-tPh3YzUc2pAkr0CgAMv',
+        'top_n': 10
+    }
+    for n, a in enumerate(args):
+        if n == 0:
+            values['top_n'] = int(a)
+        if n == 1:
+            values['url'] = a
+
+    start_cli(
+        **values
+    )
+    
+# get playlist
+url = 'https://www.youtube.com/playlist?list=PLYpZzg5x9QczXFsI-0G5z6npJl9vqymHW'  # music i like currently
+url = 'https://www.youtube.com/playlist?list=PLT7fOIbmynt3Q-tPh3YzUc2pAkr0CgAMv'  # music i liked at some point
