@@ -42,6 +42,8 @@ def get_yt_comments(id_or_url, max_call_count=None):
         except:
             cacher.add({'id_or_url':id_or_url, 'max_call_count':max_call_count}, [])
             return []
+        
+        print(vars(comments))
 
         # repeat api calls until no more comments
         if max_call_count == None:
@@ -122,11 +124,20 @@ def vidinfo(url):
 
 openai.api_key = openai_key
 def use_chatgpt_stream(messages, printfunc):
+    stringified = '\n'.join([f'{item["role"]}:\n{item["content"]}' for item in messages])
+    wordcount = len(stringified.split(' '))
+    #if wordcount*1.5 > 4000:
+    if True:  # need an actual tokenizer
+        model = 'gpt-3.5-turbo-16k'
+    else:
+        model = 'gpt-3.5-turbo'
+    #print(f'wordcount={wordcount}, model={model}')
     response = openai.ChatCompletion.create(
-        model='gpt-3.5-turbo',
+        model=model,
         messages=messages,
         temperature=0.5,
-        stream=True
+        stream=True,
+        max_tokens=500,
     )
 
     collection = []
@@ -142,10 +153,6 @@ def use_chatgpt_stream(messages, printfunc):
 
     response = ''.join(collection)
     return response
-
-def printfunc(s):
-    sys.stdout.write(s)
-    sys.stdout.flush()
 
 def chatgpt_youtube(url, docli=True):
     # putting the above into a function.
@@ -179,13 +186,18 @@ def chatgpt_youtube(url, docli=True):
                     'video info:',
                     info,
                     '',
-                    'Some additional interesting things about this video:',
+                    'Here are 5 to 10 interesting things about the video, or trivia or background information:',
+                    '',
                 ])
             }
         ]
     def chatgpt_caller(messages):
         def printfunc(s):
-            sys.stdout.write(s)
+            if s[0] in ['\n', ' ', '\t']:
+                sys.stdout.write(col('cy', s[:3]))
+                sys.stdout.write(s[3:])
+            else:
+                sys.stdout.write(s)
             sys.stdout.flush()
         response = use_chatgpt_stream(messages, printfunc)
         return response
@@ -267,9 +279,23 @@ class Cache:
         self.cache.append({'input':inp, 'output':outp})
         self.save_cache()
 
+def set_terminal_title(title):
+    print(f"\033]0;{title}\a", end="", flush=True)
+
+def get_own_filename():
+    file_path = os.path.abspath(__file__)
+    file_name = os.path.basename(file_path)
+    
+    return file_name
+
+set_terminal_title(get_own_filename())
+
 backup_folder = 'chatbackup'
 if not os.path.exists(backup_folder):
     os.mkdir(backup_folder)
-url = "https://www.youtube.com/watch?v=ArHg1d40Zt8&ab_channel=RetiredPlayersAssociation"
+
 cacher = Cache('cache.json')
-chatgpt_youtube(url)
+if __name__ == '__main__':
+    args = sys.argv[1:]
+    url = args[0]
+    chatgpt_youtube(url)
