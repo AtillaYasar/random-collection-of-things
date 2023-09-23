@@ -2,17 +2,29 @@ from youtubesearchpython import *
 import json, random, os, sys, time
 import webbrowser
 from vidchat import chatgpt_youtube  # https://github.com/AtillaYasar/random-collection-of-things/blob/main/vidchat.py
+from youtube_transcript_api import YouTubeTranscriptApi  # only used in get_transcript
 
-def set_terminal_title(title):
-    print(f"\033]0;{title}\a", end="", flush=True)
+def get_transcript(url):
+    video_id = url.split('v=')[1]
+    t = YouTubeTranscriptApi.get_transcript(video_id)
 
-def get_own_filename():
-    file_path = os.path.abspath(__file__)
-    file_name = os.path.basename(file_path)
-    
-    return file_name
+    class Transcript(list):
+        def get_timerange(self, start, end):
+            # grabs a subset of the transcript
+            def t_to_s(t):
+                # t is in the format of 'hh:mm:ss'
+                h, m, s = t.split(':')
+                return int(h) * 3600 + int(m) * 60 + int(s)
+            in_seconds = ':' not in start
+            if not in_seconds:
+                start = t_to_s(start)
+                end = t_to_s(end)
 
-set_terminal_title(get_own_filename())
+            subset = [i for i in self if i['start'] >= start and i['start'] <= end]
+            lines = [i['text'] for i in subset]
+            return '\n'.join(lines)
+
+    return Transcript(t)
 
 def vidinfo(url, get_comments=True):
     # from youtubesearchpython import Video, ResultMode
