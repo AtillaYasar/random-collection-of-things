@@ -9,17 +9,19 @@ def get_transcript(url):
     t = YouTubeTranscriptApi.get_transcript(video_id)
 
     class Transcript(list):
+        def __init__(self, t):
+            super().__init__(t)
+            self.duration = t[-1]['start'] + t[-1]['duration']
+
         def get_timerange(self, start, end):
-            # grabs a subset of the transcript
+            # grabs a subset of the transcript, can pass seconds or 'hh:mm:ss' strings
             def t_to_s(t):
-                # t is in the format of 'hh:mm:ss'
                 h, m, s = t.split(':')
                 return int(h) * 3600 + int(m) * 60 + int(s)
-            in_seconds = ':' not in start
+            in_seconds = type(start) in (int, float)
             if not in_seconds:
                 start = t_to_s(start)
                 end = t_to_s(end)
-
             subset = [i for i in self if i['start'] >= start and i['start'] <= end]
             lines = [i['text'] for i in subset]
             return '\n'.join(lines)
