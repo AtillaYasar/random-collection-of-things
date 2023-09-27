@@ -1,10 +1,7 @@
 import requests, time, json, os, zipfile, threading
 import tkinter as tk
 
-nai_token = 'find this via dev tools'
-if nai_token == 'find this via dev tools':
-  print('nai token is invalid.')
-  exit()
+nai_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik9MeUVGQ2F2MkhxemxlT3JVc1JnRSIsIm5jIjoiUF94YVF2VmJQQ1FqREF5bGZ2ODJrIiwiaWF0IjoxNjk1NzY3NDMwLCJleHAiOjE2OTgzNTk0MzB9.NC8BP1y2DZ2CVgDP_htyNl5hfJIWfeiomy35B9_jOas'
 
 class Cache:
     def __init__(self, filename):
@@ -53,7 +50,6 @@ def suggest_tags(prompt):
         cache.add(prompt, to_return)
     return to_return
 
-
 def nai_image(payload):
     url = "https://api.novelai.net/ai/generate-image"
     headers = {
@@ -90,20 +86,24 @@ def get_selected(text_widget):
         return None
     else:
         return text_widget.selection_get()
+    threading.Thread(target=to_call).start()
 
-def on_release(event):
-    sel = get_selected(text)
-    if sel is None:
-        prompt = text.get('insert wordstart', 'insert wordend')
-    else:
-        prompt = sel
-
+def fill_suggestions(prompt):
     def to_call():
         suggestions = suggest_tags(prompt)['tags']
         textup.delete('1.0', tk.END)
         to_insert = '\n'.join([s['tag'] for s in suggestions])
         textup.insert(tk.END, to_insert)
     threading.Thread(target=to_call).start()
+
+def on_release(event):
+    # finds the word you selected, or that you clicked, and writes suggestions to textup
+    sel = get_selected(text)
+    if sel is None:
+        prompt = text.get('insert wordstart', 'insert wordend')
+    else:
+        prompt = sel
+    fill_suggestions(prompt)
 
 def on_click_textup(event):
     if event.state == 12:
@@ -120,6 +120,7 @@ def on_click_textup(event):
             text.tag_add(tk.SEL, f'{idx}', f'{idx}+{length}c')
 
             do_nai_image()
+            fill_suggestions(clicked_line)
 
 payload_path = 'default_payload.json'
 if payload_path not in os.listdir():
