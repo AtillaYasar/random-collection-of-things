@@ -36,7 +36,6 @@ cache = Cache('cache.json')
 
 def suggest_tags(prompt):
     cached = cache.get(prompt)
-    print(f'cached: {cached}')
     if cached is not None:
         to_return = cached
     else:
