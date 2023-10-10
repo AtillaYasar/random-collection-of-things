@@ -107,3 +107,10 @@ lil writing tool with these features:
 - lets you shuffle and pick from, a youtube playlist, then opens the video and searches for lyrics with the video title (because im personally using it for music)
 - ![Screenshot_2](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/46633647-599e-4908-8a1e-2f0f4af0aa8f)
 - ![Screenshot_3](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/f35bb6ca-0b92-4fd7-a05b-e40928adf03c)
+
+## ytres.py
+- offshoot of jre.py (for which i havent written anything yet, and which will become a bigger program in the future)
+- do a youtube search, see results, open a video or get a summary from chatgpt
+- ![Screenshot_6](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/d3d6de43-0623-498e-9905-1e441e3266ce)
+- ![Screenshot_7](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/7e057609-5206-474a-b10b-5847523e4b9b)
+
