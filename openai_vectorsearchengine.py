@@ -2,6 +2,57 @@ import numpy as np
 import requests, json, os, time, random
 from secret_things import openai_key
 
+# note: this is the most recent and best one. dont pay attention to the others.
+def multicall_vector_search(strings):
+    def embedder_api(strings):
+        headers = {
+            "Authorization": f"Bearer {openai_key}",
+            "Content-Type": "application/json"
+        }
+        data = {
+            "input": strings,
+            "model": "text-embedding-ada-002"
+        }
+        response = requests.post("https://api.openai.com/v1/embeddings", headers=headers, json=data)
+
+        if response.status_code != 200:
+            print(vars(response))
+            raise Exception
+        else:
+            print(f'successfully embedded {len(strings)} strings')
+        data = response.json()['data']
+        return [d['embedding'] for d in data]
+
+    per_call = 50
+    to_embed = strings
+    vectors = []
+    for i in range(0, len(strings), per_call):
+        vectors += embedder_api(to_embed[i:i+per_call])
+
+    strings_emb = vectors
+    assert len(strings_emb) == len(strings)
+
+    class Searcher:
+        def __init__(self, strings, strings_emb):
+            self.strings = strings
+            self.strings_emb = strings_emb
+
+        def search(self, query):
+            query_emb = embedder_api([query])
+            triplets = sorted(
+                [(
+                    n,
+                    strings[n],
+                    np.dot(query_emb,self.strings_emb[n])
+                ) for n in range(len(self.strings))],
+                key=lambda triplet: triplet[2],
+                reverse=True
+            )
+            return triplets
+
+    return Searcher(strings, strings_emb)
+
+
 def singlecall_vector_search(query, strings):
     # tip: you could scale up a bit by replacing embedding_api with something that can return already-stored embeddings
 
