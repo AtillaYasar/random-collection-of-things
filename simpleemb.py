@@ -51,13 +51,43 @@ def embedder_api(strings):
     data = response.json()['data']
     return [d['embedding'] for d in data]
 
+def input_multi():
+    print("Enter/Paste your content. Ctrl-D or Ctrl-Z ( windows ) to save it.")
+    contents = []
+    while True:
+        try:
+            line = input()
+        except EOFError:
+            break
+        contents.append(line)
+    return '\n'.join(contents)
+
 class StaticDb:       
     def __init__(self, foldername):
         self.foldername = foldername
         self.nppath = f'{self.foldername}/array.npy'
         self.stringspath = f'{self.foldername}/idx_to_string.json'
+    
+    def grab_strings(self, cmd):
+        if os.path.exists(cmd):
+            return [p for p in readfile(cmd).split('\n\n') if p!='']
+        elif cmd == 'input':
+            return [p for p in input_multi().split('\n\n') if p!='']
+        else:
+            print(col('re', f'cant grab strings with "{cmd}"'))
+            raise Exception
+    
+    # note to github: sry, this is only relevant for another program im using this with.
+    def append_folderlist(self):
+        l = readfile('folderlist.json')
+        l.append(self.foldername)
+        writefile(list(set(l)))
 
     def create(self, strings):
+        if type(strings) == str:
+            cmd = strings
+            strings = self.grab_strings(cmd)
+
         if not os.path.exists(self.foldername):
             os.mkdir(self.foldername)
 
