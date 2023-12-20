@@ -82,6 +82,10 @@ class StaticDb:
         l = readfile('folderlist.json')
         l.append(self.foldername)
         writefile('folderlist.json', list(set(l)))
+        """writefile(
+            'folderlist.json',
+            list(set(readfile('folderlist.json')))+[self.foldername]
+        )"""
 
     def create(self, strings):
         if type(strings) == str:
@@ -102,10 +106,86 @@ class StaticDb:
         np.save(self.nppath, array)
         writefile(self.stringspath, strings)
     
+    def apply_filter(self, func, ask_input=False):
+        assert type(func('test')) == bool
+
+        if ask_input:
+            new = []
+            auto = False
+            for s in self.strings:
+                if func(s):
+                    new.append(s)
+                else:
+                    if auto:  # if func returns False you automatically go on without double checking with the user
+                        continue
+                    print(col('re', s))
+                    print('happy with this removal? (y/n/stop asking)')
+                    while True:
+                        i = input('> ')
+                        if i == 'y':
+                            break
+                        elif i == 'n':
+                            new.append(s)
+                            break
+                        elif i == 'stop asking':
+                            auto = True
+                            break
+                        else:
+                            print(col('re', 'invalid input'))
+        else:
+            new = list(filter(func, self.strings))
+
+        if new == self.strings:
+            print(col('cy', 'filtering without asking for input'))
+            print(col('re', 'filter not needed, result is the same lol'))
+            return
+        self.create(new)
+        self.load()
+        print(col('cy', f'loaded {self.foldername} after filtering'))
+    
+    def edit_strings(self, func, ask_input=False):
+        assert type(func('test')) == str
+
+        if ask_input:
+            new = []
+            auto = False
+            for s in self.strings:
+                changed = func(s)
+                if auto:
+                    new.append(changed)
+                else:
+                    print(col('re', s))
+                    print(col('gr', changed))
+                    print('happy with this change? (y/n/stop asking)')
+                    while True:
+                        i = input('> ')
+                        if i == 'y':
+                            new.append(changed)
+                            break
+                        elif i == 'n':
+                            new.append(s)
+                            break
+                        elif i == 'stop asking':
+                            new.append(changed)
+                            auto = True
+                            break
+                        else:
+                            print(col('re', 'invalid input'))
+        else:
+            print(col('cy', 'editing without asking for input'))
+            new = list(filter(func, self.strings))
+
+        if new == self.strings:
+            print(col('re', 'edit not needed, result is the same lol'))
+            return
+        self.create(new)
+        self.load()
+        print(col('cy', f'loaded {self.foldername} after editing'))
+
     def load(self):
         self.array = np.load(self.nppath)
         self.strings = readfile(self.stringspath)
-    
+
     def search(self, query, maxres):
         if type(query) == list and len(query) == 1536:
             query_emb = query
@@ -139,3 +219,21 @@ class StaticDb:
             query_emb = embedder_api([query])[0]
         scores = np.dot(self.array, np.array(query_emb))
         return np.average(scores)
+    
+    def __getitem__(self, i):
+        return self.strings[i]
+
+def example_capital_filter(s):
+    try:
+        int(s[0])
+    except:
+        pass
+    else:
+        return True
+    if s.lower() == s:
+        return False
+    if s[0].lower() == s[0]:
+        return False
+    if s[0].upper() == s[0]:
+        return True
+    return True
