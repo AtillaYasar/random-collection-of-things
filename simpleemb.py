@@ -77,7 +77,11 @@ class StaticDb:
         self.strings = readfile(self.stringspath)
     
     def search(self, query, maxres):
-        query_emb = embedder_api([query])[0]
+        if type(query) == list and len(query) == 1536:
+            query_emb = query
+        else:
+            query_emb = embedder_api([query])[0]
+
         #t0 = time.time()
         assert len(query_emb) == 1536
 
@@ -97,8 +101,11 @@ class StaticDb:
         topn = list(reversed(sorted_by_dot))[:maxres]
         res = [tup[1].decode('utf-8') for tup in topn]
         return res
-    
+
     def get_average(self, query):
-        query_emb = embedder_api([query])[0]
+        if type(query) == list and len(query) == 1536:
+            query_emb = query
+        else:
+            query_emb = embedder_api([query])[0]
         scores = np.dot(self.array, np.array(query_emb))
         return np.average(scores)
