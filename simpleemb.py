@@ -81,7 +81,7 @@ class StaticDb:
     def append_folderlist(self):
         l = readfile('folderlist.json')
         l.append(self.foldername)
-        writefile(list(set(l)))
+        writefile('folderlist.json', list(set(l)))
 
     def create(self, strings):
         if type(strings) == str:
