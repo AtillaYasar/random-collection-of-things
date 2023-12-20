@@ -97,3 +97,8 @@ class StaticDb:
         topn = list(reversed(sorted_by_dot))[:maxres]
         res = [tup[1].decode('utf-8') for tup in topn]
         return res
+    
+    def get_average(self, query):
+        query_emb = embedder_api([query])[0]
+        scores = np.dot(self.array, np.array(query_emb))
+        return np.average(scores)
