@@ -133,10 +133,10 @@ class StaticDb:
                         else:
                             print(col('re', 'invalid input'))
         else:
+            print(col('cy', 'filtering without asking for input'))
             new = list(filter(func, self.strings))
 
         if new == self.strings:
-            print(col('cy', 'filtering without asking for input'))
             print(col('re', 'filter not needed, result is the same lol'))
             return
         self.create(new)
