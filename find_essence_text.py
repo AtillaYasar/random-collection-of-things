@@ -162,21 +162,12 @@ def get_multiple_essence(string, chunksize, layercount):
     chunks = get_chunks(string, chunksize)
     picks = []
     for i in range(layercount):
-        if i == 0:
-            # pick the chunk that's most similar to the full string
-            picks.append(embsort(
-                string,
-                chunks,
-                1,
-            )[0])
-        else:
-            # same but while discounting for previous picks' similarity
-            picks.append(embsort_multiquery(
-                [string],  # positive query set
-                picks,  # negative query set
-                chunks,
-                1,
-            )[0])
+        picks.append(embsort_multiquery(
+            [string],  # positive query set
+            picks,  # negative query set
+            chunks,
+            1,
+        )[0])
     return picks
 
 
