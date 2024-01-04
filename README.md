@@ -116,4 +116,4 @@ lil writing tool with these features:
 
 ## bari_arakeel
 - folder has a tkinter app which i made for changing the timestamps of lyrics associated with a song. here's a video where i show it: https://youtu.be/oKr6OMyhcVM folder has the lyrics json, the mp3 file, and the app in `bari_arakeel.py`
-- you can call it a prototype but that implies ill ever imporove it lol. it served its purpose for me xD
+- you can call it a prototype but that implies ill ever improve it lol. it served its purpose for me xD
