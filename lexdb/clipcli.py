@@ -1,7 +1,3 @@
-# source code for creating this folder is a little messier, not sure if ill share.
-print('this database was created using this clips playlist "https://www.youtube.com/playlist?list=PLrAXtmErZgOeciFP3CBCIEElOJeitOr41",\nthis episodes playlist "https://www.youtube.com/playlist?list=PLrAXtmErZgOdP_8GztsuKi9nrraNbKKp4",\nand this library "https://pypi.org/project/youtube-search-python/"')
-print('-'*10)
-
 import json, os
 
 try:
@@ -101,4 +97,9 @@ class Clips:
                     '',
                 ]:
                     print(string)
-Clips().cli()
+
+if __name__ == '__main__':
+    # source code for creating this folder is a little messier, not sure if ill share.
+    print('this database was created using this clips playlist "https://www.youtube.com/playlist?list=PLrAXtmErZgOeciFP3CBCIEElOJeitOr41",\nthis episodes playlist "https://www.youtube.com/playlist?list=PLrAXtmErZgOdP_8GztsuKi9nrraNbKKp4",\nand this library "https://pypi.org/project/youtube-search-python/"')
+    print('-'*10)
+    Clips().cli()
