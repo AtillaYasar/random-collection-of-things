@@ -117,3 +117,10 @@ lil writing tool with these features:
 ## bari_arakeel
 - folder has a tkinter app which i made for changing the timestamps of lyrics associated with a song. here's a video where i show it: https://youtu.be/oKr6OMyhcVM folder has the lyrics json, the mp3 file, and the app in `bari_arakeel.py`
 - you can call it a prototype but that implies ill ever improve it lol. it served its purpose for me xD
+
+## lexdb
+- it's a database of a bunch of lex fridman clips (3k+) from this playlist: https://www.youtube.com/playlist?list=PLrAXtmErZgOeciFP3CBCIEElOJeitOr41
+- i did some work to get the episode belonging to each clip, and full video info of the clips and episodes, using this library "https://pypi.org/project/youtube-search-python/" and this playlist "https://www.youtube.com/playlist?list=PLrAXtmErZgOdP_8GztsuKi9nrraNbKKp4" (which has the full episodes)
+- there's a little python file that just shows that the database works, performs some checks, it provides a cli so you can look around, but it's basically a code example for how to navigate the database
+  - ![lex1](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/2cce920d-f52d-4245-a4ce-23fad8778232)
+  - ![lex2](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/d85f594a-a9ff-4b1e-9eb0-07862081f751)
