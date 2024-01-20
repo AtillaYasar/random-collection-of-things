@@ -48,12 +48,14 @@ class Clips:
         
         # checking
         for c in self.clips:
+            found = False
             title = c['title']
             ep_url = mapper[title]
             for ep in self.fulleps:
                 if ep['link'] == ep_url:
+                    found = True
                     break
-            else:
+            if not found:
                 raise Exception(f'couldnt find full episode for {title}')
     
     def getep(self, cliptitle):
