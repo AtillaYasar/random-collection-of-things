@@ -124,3 +124,5 @@ lil writing tool with these features:
 - there's a little python file that just shows that the database works, performs some checks, it provides a cli so you can look around, but it's basically a code example for how to navigate the database
   - ![lex1](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/2cce920d-f52d-4245-a4ce-23fad8778232)
   - ![lex2](https://github.com/AtillaYasar/random-collection-of-things/assets/112716905/d85f594a-a9ff-4b1e-9eb0-07862081f751)
+- new:  to see the point of the `experiment` folder, look at `nodes.py -> test()`.
+  - basically im trying out the Node class that's like a dictionary, but for special keys you can have functions that get the value for the first time you ask it, and cache it. which is good for things with api calls (like getting the transcript of a video, or openai text embeddings)
