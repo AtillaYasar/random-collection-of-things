@@ -5,7 +5,7 @@ class Node:
         self.dictionary = dictionary
         self.get_special_values = get_special_values
         for k,v in get_special_values.items():
-            assert callable(v)  # function will be fed self.dictionary, to find the key
+            assert callable(v)  # function will be fed self.dictionary, to find the value
     
     def __setitem__(self, key, value):
         self.dictionary[key] = value
