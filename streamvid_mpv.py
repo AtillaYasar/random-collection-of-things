@@ -14,8 +14,11 @@ def streamed_playback(url, x, y, width, height, panscan=None):
     # Command to play video using yt-dlp and mpv
     player_command = [
         'yt-dlp',
-        '-o', '-',  # Output to stdout
-        '--quiet',  # Suppress the output
+        '-f bestvideo+best+bestaudio',
+        '--video-multistreams',
+        '--audio-multistreams',
+        '-o', '-',
+        '--quiet',
         url
     ]
 
